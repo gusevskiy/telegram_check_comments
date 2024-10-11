@@ -22,7 +22,7 @@ nlp = pipeline("text-classification", model=model, tokenizer=tokenizer)
 async def model_check_text(text: str):
     """[{'label': 'toxic', 'score': 0.994674563407898}]"""
     sentiment = nlp(text)
-    print(sentiment)
+    # print(sentiment)
     if sentiment[0].get("label") == "negative":
         logging.info(sentiment)
         return True
@@ -35,4 +35,4 @@ if __name__ == "__main__":
             "Теперь, чтобы загрузить модель из сохранённой папки, вы можете сделать следующее:"
         )
     )
-    print(result)
+    # print(result)

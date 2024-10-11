@@ -1,11 +1,14 @@
 import asyncio
-import logging
 import os
 
 from aiogram import Bot, Dispatcher, F
 from dotenv import load_dotenv
 
+from handlers.basic import get_text
+from utils.log_config import setup_logger
+
 load_dotenv()
+logger = setup_logger()
 
 
 async def start_bot(bot: Bot):
@@ -17,19 +20,13 @@ async def stop_bot(bot: Bot):
 
 
 async def start():
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s - [%(levelname)s] - %(name)s - "
-        "(%(filename)s).%(funcName)s(%(lineno)d) - %(message)s",
-    )
-
     bot = Bot(token=os.environ.get("TOKEN"))
     dp = Dispatcher()
 
     dp.startup.register(start_bot)
     dp.shutdown.register(stop_bot)
 
-
+    dp.message.register(get_text, F.text)
 
     try:
         await dp.start_polling(bot)
@@ -38,6 +35,4 @@ async def start():
 
 
 if __name__ == "__main__":
-    # print(os.environ.get('TOKEN'))
-
     asyncio.run(start())
