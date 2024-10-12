@@ -3,25 +3,12 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from aiogram import Bot
 import asyncio
-from aiogram.types import Message
 
 from transformers import BertForSequenceClassification, BertTokenizer, pipeline
 from utils.log_config import setup_logger
 
 logger = setup_logger()
-
-
-async def get_text(msg: Message, bot: Bot):
-    text = msg.text
-    # username = msg.from_user.username
-    print(msg.message_id)
-    if await model_check_text(text):
-        # logger.info(msg)
-        await msg.reply("You toxic, I'm blocking you")
-
-
 
 
 # Загрузить модель локально
