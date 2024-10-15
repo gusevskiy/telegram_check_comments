@@ -27,13 +27,13 @@ CHAT_ID=
 Для работы приложения нужно поднять сессию https://docs.pyrogram.org/start/auth
 
 * нужно передать в файл `add_session.py` `api_id` и `api_hash` и запустить скрипт
-* Enter phone number or bot token: указать номер
-* Enter confirmation code:  ввести код (пришлет телеграм)
 ```bash
 python .\utils\add_session.py
 ```
+* Enter phone number or bot token: указать номер
+* Enter confirmation code:  ввести код (пришлет телеграм)
 
-Модель загружаем локально в папку, так работает быстрее чем из venv
+Модель загружаем локально в папку, так работает быстрее чем из venv.  
 Загрузим модель локально в папку. Выполнить команду
 ```bash
 python ./handlers/basic.py
