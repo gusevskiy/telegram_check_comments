@@ -166,3 +166,4 @@ cython_debug/
 # my ignore
 
 cointegrated_rubert-tiny-sentiment-balanced/
+*.session
