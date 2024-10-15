@@ -30,7 +30,7 @@ async def work_block(app, toxic_user_id):
         chat_id,
         user_id=toxic_user_id,
         permissions=ChatPermissions(),
-        until_date=datetime.now() + timedelta(hour=block_time_hour),
+        until_date=datetime.now() + timedelta(hours=block_time_hour),
     )
 
 
@@ -48,7 +48,7 @@ async def get_message(app, message: Message):
         user_name = message.from_user.first_name
         user_id = message.from_user.id
         if check:
-            # пишем в лог только отпределеные как негатив
+            # пишем в лог только определенные как негатив
             logger.info(f"{check} -> {result} -> {message.text[:30]}")
             # к предупреждениям пользователя прибавляем score
             warnings = user_warnings.get(user_id, 0) + result[0].get("score")
@@ -60,7 +60,9 @@ async def get_message(app, message: Message):
                 user_warnings[user_id] = 0
                 logger.info(f"{user_name} - {user_id} blocked")
                 # блокируем
-                await message.reply(f"{user_name} -> You toxic, I'm blocking you")
+                await message.reply(
+                    f"{user_name} -> You toxic, I'm blocking you on {block_time_hour} hour!!!"
+                )
                 await work_block(app, user_id)
             else:
                 await message.reply(
